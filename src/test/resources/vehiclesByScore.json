@@ -1,0 +1,16 @@
+[ {
+  "name" : "Vehicle1",
+  "score" : 0,
+  "rating" : 1.1,
+  "combinedScore" : 1.1
+}, {
+  "name" : "Vehicle2",
+  "score" : 0,
+  "rating" : 1.2,
+  "combinedScore" : 1.2
+}, {
+  "name" : "Vehicle3",
+  "score" : 0,
+  "rating" : 1.3,
+  "combinedScore" : 1.3
+} ]

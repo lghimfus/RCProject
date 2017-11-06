@@ -1,0 +1,10 @@
+[ {
+  "name" : "Vehicle1",
+  "price" : 1.3
+}, {
+  "name" : "Vehicle2",
+  "price" : 1.2
+}, {
+  "name" : "Vehicle3",
+  "price" : 1.1
+} ]

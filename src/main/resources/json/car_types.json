@@ -1,0 +1,38 @@
+{
+   "M":{
+      "value":"Mini",
+      "score":0
+   },
+   "E":{
+      "value":"Economy",
+      "score":0
+   },
+   "C":{
+      "value":"Compact",
+      "score":0
+   },
+   "I":{
+      "value":"Intermediate",
+      "score":0
+   },
+   "S":{
+      "value":"Standard",
+      "score":0
+   },
+   "F":{
+      "value":"Full size",
+      "score":0
+   },
+   "P":{
+      "value":"Premium",
+      "score":0
+   },
+   "L":{
+      "value":"Luxury",
+      "score":0
+   },
+   "X":{
+      "value":"Special",
+      "score":0
+   }
+}

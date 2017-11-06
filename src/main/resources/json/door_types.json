@@ -1,0 +1,34 @@
+{
+   "B":{
+      "value":"2 doors",
+      "score":0
+   },
+   "C":{
+      "value":"4 doors",
+      "score":0
+   },
+   "D":{
+      "value":"5 doors",
+      "score":0
+   },
+   "W":{
+      "value":"Estate",
+      "score":0
+   },
+   "T":{
+      "value":"Convertible",
+      "score":0
+   },
+   "F":{
+      "value":"SUV",
+      "score":0
+   },
+   "P":{
+      "value":"Pick up",
+      "score":0
+   },
+   "V":{
+      "value":"Passenger Van",
+      "score":0
+   }
+}

@@ -1,0 +1,16 @@
+[ {
+  "name" : "Vehicle1",
+  "carType" : "Compact",
+  "supplier" : "Hertz",
+  "rating" : 1.1
+}, {
+  "name" : "Vehicle2",
+  "carType" : "Compact",
+  "supplier" : "Hertz",
+  "rating" : 1.2
+}, {
+  "name" : "Vehicle3",
+  "carType" : "Compact",
+  "supplier" : "Hertz",
+  "rating" : 1.3
+} ]

@@ -6,36 +6,41 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
+import org.json.JSONObject;
+
 /**
- * Takes care of the requests over the network.
+ * 
+ * This class handles requests over the network.
+ * 
+ * @author lghimfus
  *
  */
 public class NetworkUtils {
 	/**
-     * This method returns the result from the HTTP response.
-     *
-     * @param url The URL to fetch the HTTP response from.
-     * @return The contents of the HTTP response.
-     * @throws IOException Related to network and stream reading.
-     */
-    public static String getResponseFromHttpUrl(URL url) throws IOException {
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        
-        try {
-            InputStream in = urlConnection.getInputStream();
+   * Returns the JSON result from the HTTP response.
+   *
+   * @param url the URL to fetch the HTTP response from.
+   * @return a JSON object from the HTTP response.
+   * @throws IOException related to network and stream reading.
+   */
+  public static JSONObject getJsonResponseFromHttpUrl(URL url) throws IOException {
+    HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+    
+    try {
+      InputStream in = urlConnection.getInputStream();
 
-            Scanner scanner = new Scanner(in);
-            scanner.useDelimiter("\\A");
+      Scanner scanner = new Scanner(in);
+      scanner.useDelimiter("\\A");
 
-            boolean hasInput = scanner.hasNext();
-            if (hasInput) {
-                return scanner.next();
-            } else {
-                return null;
-            }
-        } finally {
-            urlConnection.disconnect();
-        }
+      boolean hasInput = scanner.hasNext();
+      if (hasInput) {
+          return new JSONObject(scanner.next());
+      } else {
+          return null;
+      }
+    } finally {
+      urlConnection.disconnect();
     }
+  }
     
 }

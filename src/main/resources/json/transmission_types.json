@@ -1,0 +1,10 @@
+{
+   "M":{
+      "value":"Manual",
+      "score":1
+   },
+   "A":{
+      "value":"Automatic",
+      "score":5
+   }
+}

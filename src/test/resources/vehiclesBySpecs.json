@@ -1,0 +1,25 @@
+[ {
+  "name" : "Vehicle1",
+  "sipp" : "CWMR",
+  "carType" : "Compact",
+  "doorsType" : "Estate",
+  "transmission" : "Manual",
+  "fuel" : "Petrol",
+  "airCon" : "AC"
+}, {
+  "name" : "Vehicle2",
+  "sipp" : "CWMR",
+  "carType" : "Compact",
+  "doorsType" : "Estate",
+  "transmission" : "Manual",
+  "fuel" : "Petrol",
+  "airCon" : "AC"
+}, {
+  "name" : "Vehicle3",
+  "sipp" : "CWMR",
+  "carType" : "Compact",
+  "doorsType" : "Estate",
+  "transmission" : "Manual",
+  "fuel" : "Petrol",
+  "airCon" : "AC"
+} ]
