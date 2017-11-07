@@ -16,7 +16,7 @@ import com.lghimfus.app.RCProject.models.VehicleSpecs;
 import com.lghimfus.app.RCProject.utils.NetworkUtils;
 
 /**
- * This class consists of methods that handles requests from a client.
+ * This class consists of methods that handle requests from a client.
  * 
  * @author lghimfus
  *
@@ -95,7 +95,7 @@ public class VehicleService {
    * Gets the list of all the vehicles and finds those that belongs to a certain
    * car type.
    * 
-   * @param t is the car type.
+   * @param type is the car type.
    * 
    * @return a list of all the vehicles belonging to a certain car type.
    */

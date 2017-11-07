@@ -26,7 +26,7 @@ public class FormatUtilsTest {
   
   @Test
   public void testFormatAllByPrice() {
-    String expected = "{Vehicle1} - {1.30}";
+    String expected = "1. {Vehicle1} - {1.30}";
     String actual = FormatUtils.formatAllByPrice(vehicles);
     
     assertEquals(expected, actual);
@@ -34,7 +34,7 @@ public class FormatUtilsTest {
   
   @Test
   public void testFormatAllBySpecs() {
-    String expected = "{Vehicle1} - {CWMR} - {Compact} - {Estate} - {Manual} - {Petrol} - {AC}";
+    String expected = "1. {Vehicle1} - {CWMR} - {Compact} - {Estate} - {Manual} - {Petrol} - {AC}";
     String actual = FormatUtils.formatAllBySpecs(vehicles);
     
     assertEquals(expected, actual);
@@ -42,7 +42,7 @@ public class FormatUtilsTest {
   
   @Test
   public void testFormatAllBySupplier() {
-    String expected = "{Vehicle1} - {Compact} - {Hertz} - {1.10}";
+    String expected = "1. {Vehicle1} - {Compact} - {Hertz} - {1.10}";
     String actual = FormatUtils.formatAllBySupplier(vehicles);
     
     assertEquals(expected, actual);
@@ -50,7 +50,7 @@ public class FormatUtilsTest {
   
   @Test
   public void testformatAllByScore() {
-    String expected = "{Vehicle1} - {3} - {1.10} - {4.10}";
+    String expected = "1. {Vehicle1} - {3} - {1.10} - {4.10}";
     String actual = FormatUtils.formatAllByScore((vehicles));
     
     assertEquals(expected, actual);

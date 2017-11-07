@@ -7,8 +7,6 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.lghimfus.app.RCProject.models.Vehicle;
 import com.lghimfus.app.RCProject.serializers.VehicleByPriceSerializer;
 import com.lghimfus.app.RCProject.serializers.VehicleByScoreSerializer;
@@ -27,67 +25,103 @@ import spark.Spark;
  */
 public class VehicleController {
   
+  private final String CUSTOM_JSON = "custom";
+  private final String FULL_JSON = "full";
+  
   public VehicleController(final VehicleService vehicleService) {
-
-    Spark.get("/vehiclesByPrice", (req, res) ->  {
-      res.status(200);
-      res.type("text/plain");
-      return FormatUtils.formatAllByPrice(vehicleService.findAllOrderByPriceAsc());
-    });
-      
-    Spark.get("/vehiclesBySpecs", (req, res) ->  {
-      res.status(200);
-      res.type("text/plain");
-      return FormatUtils.formatAllBySpecs(vehicleService.findAll());
-    });
-    
-    Spark.get("/vehiclesBySupplierRating", (req, res) -> {
-      res.status(200);
-      res.type("text/plain");
-      return FormatUtils.formatAllBySupplier(
-          vehicleService.findAllTypesOrderByHighestRatedSupplierDesc());
-    });
-    
-    Spark.get("/vehiclesByScore", (req, res) -> {
-      res.status(200);
-      res.type("text/plain");
-      return FormatUtils.formatAllByScore(
-          vehicleService.findAllOrderByCombinedScoreDesc());
-    });
-        
-    Spark.get("/vehiclesByPriceJson", (req, res) -> {
-      res.status(200);
-      res.type("application/json");
-      return javaToJson(vehicleService.findAllOrderByPriceAsc(), 
-          new VehicleByPriceSerializer());
-    });
-    
-    Spark.get("/vehiclesBySpecsJson", (req, res) -> {
-      res.status(200);
-      res.type("application/json");
-      return javaToJson(vehicleService.findAll(), new VehicleBySpecsSerializer());
-    });
-    
-    Spark.get("/vehiclesBySupplierRatingJson", (req, res) -> {
-      res.status(200);
-      res.type("application/json");
-      return javaToJson(vehicleService.findAllTypesOrderByHighestRatedSupplierDesc(),
-          new VehicleBySupplierRatingSerializer());
-    });
-    
-    Spark.get("/vehiclesByScoreJson", (req, res) -> {
-      res.status(200);
-      res.type("application/json");
-      return javaToJson(vehicleService.findAllOrderByCombinedScoreDesc(), 
-          new VehicleByScoreSerializer());
-    });
     
     Spark.get("/vehicles", (req, res) -> {
       res.status(200);
       res.type("application/json");
+      return javaToJson(vehicleService.findAll(), null);
+    });
+        
+    Spark.get("/vehiclesByPrice", (req, res) -> {
+      res.status(200);
       
-      Gson gson = new GsonBuilder().setPrettyPrinting().create();
-      return gson.toJson(vehicleService.findAll());
+      if (req.queryParams().contains("json")) {
+        res.type("application/json");
+      
+        switch(req.queryParams("json")) {
+          case CUSTOM_JSON:
+            return javaToJson(vehicleService.findAllOrderByPriceAsc(), new VehicleByPriceSerializer());
+          case FULL_JSON:
+          default:
+            return javaToJson(vehicleService.findAllOrderByPriceAsc(), null);
+        }
+      }
+      else {
+        res.type("text/plain");
+        return FormatUtils.formatAllByPrice(vehicleService.findAllOrderByPriceAsc());
+      }
+    });
+    
+    Spark.get("/vehiclesBySpecs", (req, res) -> {
+      res.status(200);
+      
+      if (req.queryParams().contains("json")) {
+        res.type("application/json");
+        
+        switch(req.queryParams("json")) {
+          case CUSTOM_JSON:
+            res.type("application/json");
+            return javaToJson(vehicleService.findAll(), new VehicleBySpecsSerializer());
+          case FULL_JSON:
+          default:
+            res.type("application/json");
+            return javaToJson(vehicleService.findAll(), null);
+        }
+      }
+      else {
+        res.type("text/plain");
+        return FormatUtils.formatAllBySpecs(vehicleService.findAll());
+      }
+    });
+    
+    Spark.get("/vehiclesBySupplierRating", (req, res) -> {
+      res.status(200);
+      
+      if (req.queryParams().contains("json")) {
+        res.type("application/json");
+        
+        switch(req.queryParams("json")) {
+          case CUSTOM_JSON:
+            res.type("application/json");
+            return javaToJson(vehicleService.findAllTypesOrderByHighestRatedSupplierDesc(),
+                new VehicleBySupplierRatingSerializer());
+          case FULL_JSON:
+          default:
+            res.type("application/json");
+            return javaToJson(vehicleService.findAllTypesOrderByHighestRatedSupplierDesc(), null);
+          }
+      }
+      else {
+        res.type("text/plain");
+        return FormatUtils.formatAllBySupplier(vehicleService.findAllTypesOrderByHighestRatedSupplierDesc());
+      }
+    });
+    
+    Spark.get("/vehiclesByScore", (req, res) -> {
+      res.status(200);
+      
+      if (req.queryParams().contains("json")) {
+        res.type("application/json");
+        
+        switch(req.queryParams("json")) {
+          case CUSTOM_JSON:
+            res.type("application/json");
+            return javaToJson(vehicleService.findAllOrderByCombinedScoreDesc(), 
+                new VehicleByScoreSerializer());
+          case FULL_JSON:
+          default:
+            res.type("application/json");
+            return javaToJson(vehicleService.findAllOrderByCombinedScoreDesc(), null);
+          }
+      }
+      else {
+        res.type("text/plain");
+        return FormatUtils.formatAllByScore(vehicleService.findAllOrderByCombinedScoreDesc());
+      }
     });
   
   } // main
@@ -103,7 +137,8 @@ public class VehicleController {
     try {
       ObjectMapper mapper = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
       SimpleModule module = new SimpleModule();
-      module.addSerializer(Vehicle.class, serializer);
+      if (serializer != null)
+        module.addSerializer(Vehicle.class, serializer);
       mapper.registerModule(module);
       
       return mapper.writeValueAsString(vehicles);

@@ -28,7 +28,7 @@ public class SippSpecsService{
   private static final int FUEL_AC_TYPE_POS = 3;
   
   // Holds all the data about SIPP specifications.
-  private SippSpecs sippSpecs;
+  private SippSpecs sippSpecsTable;
   
   public SippSpecsService() {
     sippJsonToJava();
@@ -38,7 +38,7 @@ public class SippSpecsService{
    * @return a SippSpecs container with all the SIPP data.
    */
   public SippSpecs getSippSpecs() {
-    return this.sippSpecs;
+    return this.sippSpecsTable;
   }
   
   /**
@@ -49,8 +49,8 @@ public class SippSpecsService{
     Character sippLetter = v.getSipp().charAt(CAR_TYPE_POS);
     
     // If the SIPP letter is recognized return its value.
-    if(sippSpecs.getCarTypesMap().containsKey(sippLetter)){
-      return sippSpecs.getCarTypesMap().get(sippLetter).getValue();
+    if(sippSpecsTable.getCarTypesMap().containsKey(sippLetter)){
+      return sippSpecsTable.getCarTypesMap().get(sippLetter).getValue();
     }
     
     return "unknown";
@@ -64,8 +64,8 @@ public class SippSpecsService{
     Character sippLetter = v.getSipp().charAt(DOOR_TYPE_POS);
     
     // If the SIPP letter is recognized return its value.
-    if(sippSpecs.getDoorTypesMap().containsKey(sippLetter))
-      return sippSpecs.getDoorTypesMap().get(sippLetter).getValue();
+    if(sippSpecsTable.getDoorTypesMap().containsKey(sippLetter))
+      return sippSpecsTable.getDoorTypesMap().get(sippLetter).getValue();
     
      return "unknown";
    }
@@ -78,8 +78,8 @@ public class SippSpecsService{
     Character sippLetter = v.getSipp().charAt(TRANSMISSION_TYPE_POS);
     
     // If the SIPP letter is recognized return its value.
-    if(sippSpecs.getTransmissionTypesMap().containsKey(sippLetter))
-      return sippSpecs.getTransmissionTypesMap().get(sippLetter).getValue();
+    if(sippSpecsTable.getTransmissionTypesMap().containsKey(sippLetter))
+      return sippSpecsTable.getTransmissionTypesMap().get(sippLetter).getValue();
     
     return "unknown";
   }
@@ -92,8 +92,8 @@ public class SippSpecsService{
     Character sippLetter = v.getSipp().charAt(FUEL_AC_TYPE_POS);
     
     // If the SIPP letter is recognized return its value.
-    if(sippSpecs.getFuelAcMap().containsKey(sippLetter))
-      return sippSpecs.getFuelAcMap().get(sippLetter).getValue().split("/")[0];
+    if(sippSpecsTable.getFuelAcMap().containsKey(sippLetter))
+      return sippSpecsTable.getFuelAcMap().get(sippLetter).getValue().split("/")[0];
   
     return "unknown";
   }
@@ -106,8 +106,8 @@ public class SippSpecsService{
     Character sippLetter = v.getSipp().charAt(FUEL_AC_TYPE_POS);
     
     // If the SIPP letter is recognized return its value.
-    if(sippSpecs.getFuelAcMap().containsKey(sippLetter))
-      return sippSpecs.getFuelAcMap().get(sippLetter).getValue().split("/")[1];
+    if(sippSpecsTable.getFuelAcMap().containsKey(sippLetter))
+      return sippSpecsTable.getFuelAcMap().get(sippLetter).getValue().split("/")[1];
   
     return "unknown";
   }
@@ -124,13 +124,13 @@ public class SippSpecsService{
     
     sippLetter = v.getSipp().charAt(TRANSMISSION_TYPE_POS);
     // If the SIPP letter is recognized add up its corresponding score.
-    if(sippSpecs.getTransmissionTypesMap().containsKey(sippLetter))
-     score += sippSpecs.getTransmissionTypesMap().get(sippLetter).getScore();
+    if(sippSpecsTable.getTransmissionTypesMap().containsKey(sippLetter))
+     score += sippSpecsTable.getTransmissionTypesMap().get(sippLetter).getScore();
 
     sippLetter = v.getSipp().charAt(FUEL_AC_TYPE_POS); 
     // If the SIPP letter is recognized add up its corresponding score.
-    if(sippSpecs.getFuelAcMap().containsKey(sippLetter))
-     score += sippSpecs.getFuelAcMap().get(sippLetter).getScore();
+    if(sippSpecsTable.getFuelAcMap().containsKey(sippLetter))
+     score += sippSpecsTable.getFuelAcMap().get(sippLetter).getScore();
 
     return score;
   }
@@ -142,24 +142,24 @@ public class SippSpecsService{
    */
   public void sippJsonToJava() {
     ObjectMapper mapper = new ObjectMapper();  
-    sippSpecs = new SippSpecs();
+    sippSpecsTable = new SippSpecs();
     
     try {
       ClassLoader classloader = getClass().getClassLoader();
       
-      sippSpecs.setCarTypesMap(
+      sippSpecsTable.setCarTypesMap(
         mapper.readValue(classloader.getResourceAsStream(CAR_TYPES_PATH),
             new TypeReference<Map<Character, LetterSpecsWrapper>>(){}));
       
-      sippSpecs.setDoorTypesMap(
+      sippSpecsTable.setDoorTypesMap(
         mapper.readValue(classloader.getResourceAsStream(DOOR_TYPES_PATH),
             new TypeReference<Map<Character, LetterSpecsWrapper>>(){}));
       
-      sippSpecs.setTransmissionTypesMap(
+      sippSpecsTable.setTransmissionTypesMap(
         mapper.readValue(classloader.getResourceAsStream(TRANSMISSION_TYPES_PATH),
             new TypeReference<Map<Character, LetterSpecsWrapper>>(){}));
       
-      sippSpecs.setFuelAcMap(
+      sippSpecsTable.setFuelAcMap(
         mapper.readValue(classloader.getResourceAsStream(FUEL_AC_TYPES_PATH),
             new TypeReference<Map<Character, LetterSpecsWrapper>>(){}));   
     } 
