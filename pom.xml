@@ -54,7 +54,6 @@
     </dependency>
   </dependencies>
 
-  <!-- java -cp target/RCProject-0.0.1-SNAPSHOT-jar-with-dependencies.jar com.lghimfus.app.RCProject.RestApplication -->
   <build>
     <plugins>
         <plugin>
@@ -64,12 +63,6 @@
                 <descriptorRefs>
                     <descriptorRef>jar-with-dependencies</descriptorRef>
                 </descriptorRefs>
-<!--                 <archive>
-                    <manifest>
-                        <addClasspath>true</addClasspath>
-                        <mainClass>com.lghimfus.app.RCProject.ConsoleApplication</mainClass>
-                    </manifest>
-                </archive> -->
             </configuration>
             <executions>
                 <execution>
