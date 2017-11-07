@@ -64,11 +64,9 @@ public class VehicleController {
         
         switch(req.queryParams("json")) {
           case CUSTOM_JSON:
-            res.type("application/json");
             return javaToJson(vehicleService.findAll(), new VehicleBySpecsSerializer());
           case FULL_JSON:
           default:
-            res.type("application/json");
             return javaToJson(vehicleService.findAll(), null);
         }
       }
@@ -86,12 +84,10 @@ public class VehicleController {
         
         switch(req.queryParams("json")) {
           case CUSTOM_JSON:
-            res.type("application/json");
             return javaToJson(vehicleService.findAllTypesOrderByHighestRatedSupplierDesc(),
                 new VehicleBySupplierRatingSerializer());
           case FULL_JSON:
           default:
-            res.type("application/json");
             return javaToJson(vehicleService.findAllTypesOrderByHighestRatedSupplierDesc(), null);
           }
       }
@@ -109,12 +105,10 @@ public class VehicleController {
         
         switch(req.queryParams("json")) {
           case CUSTOM_JSON:
-            res.type("application/json");
             return javaToJson(vehicleService.findAllOrderByCombinedScoreDesc(), 
                 new VehicleByScoreSerializer());
           case FULL_JSON:
           default:
-            res.type("application/json");
             return javaToJson(vehicleService.findAllOrderByCombinedScoreDesc(), null);
           }
       }
